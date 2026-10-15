@@ -1,0 +1,327 @@
+{
+  "model": "swiss-ai/Apertus-v1.5-8B",
+  "cases": 30,
+  "seed": 7,
+  "values_total": 294,
+  "values_by_type": {
+    "PERSON": 30,
+    "DATE_OF_BIRTH": 30,
+    "ADDRESS": 60,
+    "AHV": 30,
+    "PHONE": 30,
+    "EMAIL": 17,
+    "IBAN": 30,
+    "ORG": 30,
+    "UID": 30,
+    "PASSPORT": 7
+  },
+  "leak_rate": {
+    "patterns": 0.4252,
+    "patterns+apertus": 0.017
+  },
+  "leaks_by_type": {
+    "patterns": {
+      "PERSON": 30,
+      "ADDRESS": 60,
+      "ORG": 30,
+      "DATE_OF_BIRTH": 5
+    },
+    "patterns+apertus": {
+      "ADDRESS": 5
+    }
+  },
+  "false_positive_spans": {
+    "patterns": 0,
+    "patterns+apertus": 0
+  },
+  "false_positive_examples": [],
+  "task_fidelity_mean": {
+    "baseline_raw": 1.0,
+    "shield": 0.9333
+  },
+  "placeholders_repaired": 80,
+  "placeholders_unresolved": 0,
+  "per_case": [
+    {
+      "id": 0,
+      "lang": "de",
+      "baseline_answer": "Giulia Favre; 756.5908.3016.64; CH14 6091 3909 9603 0824 6",
+      "model_answer_redacted": "PERSON_5a9922; AHV_544e62; IBAN_3285b9",
+      "final_answer": "Giulia Favre; 756.5908.3016.64; CH14 6091 3909 9603 0824 6",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 1,
+      "lang": "fr",
+      "baseline_answer": "Mia Keller; 756.5797.5432.37; CH05 7574 9118 6252 7601 8",
+      "model_answer_redacted": "Client; [[PERSON_e0118c]]; [[IBAN_f6d501]]",
+      "final_answer": "Client; Mia Keller; CH05 7574 9118 6252 7601 8",
+      "missing": [
+        "756.5797.5432.37"
+      ],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 2,
+      "lang": "it",
+      "baseline_answer": "Nicolas Widmer; 756.7529.1703.46; CH24 6712 7684 2684 6563 2",
+      "model_answer_redacted": "PERSON_db46ec; AHV_0243bb; IBAN_4dc820",
+      "final_answer": "Nicolas Widmer; 756.7529.1703.46; CH24 6712 7684 2684 6563 2",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 3,
+      "lang": "de",
+      "baseline_answer": "Julien Steiner; 756.0786.6661.71; CH75 3721 5901 0928 1590 1",
+      "model_answer_redacted": "PERSON_39fd1a; AHV_40af83; IBAN_7cc436",
+      "final_answer": "Julien Steiner; 756.0786.6661.71; CH75 3721 5901 0928 1590 1",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 4,
+      "lang": "fr",
+      "baseline_answer": "David Ferrari; 756.4728.0385.21; CH69 1485 2538 8853 9336 3",
+      "model_answer_redacted": "PERSON_ea8cc3; AHV_b8a87a; IBAN_9682b8",
+      "final_answer": "David Ferrari; 756.4728.0385.21; CH69 1485 2538 8853 9336 3",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 5,
+      "lang": "it",
+      "baseline_answer": "Matteo Rochat; 756.3799.0751.14; CH68 2651 6761 2220 2972 9",
+      "model_answer_redacted": "PERSON_240713; AHV_ab535a; IBAN_650b5d",
+      "final_answer": "Matteo Rochat; 756.3799.0751.14; CH68 2651 6761 2220 2972 9",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 6,
+      "lang": "de",
+      "baseline_answer": "Chiara Brunner; 756.9548.6205.74; CH93 2828 8072 9022 2791 8",
+      "model_answer_redacted": "PERSON_76fd9b; AHV_1f6e97; IBAN_c5f26d",
+      "final_answer": "Chiara Brunner; 756.9548.6205.74; CH93 2828 8072 9022 2791 8",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 7,
+      "lang": "fr",
+      "baseline_answer": "Chiara Huber; 756.3848.3726.14; CH47 3613 4125 2427 3167 2",
+      "model_answer_redacted": "Client; AHV_aa9c95; IBAN_805d39",
+      "final_answer": "Client; 756.3848.3726.14; CH47 3613 4125 2427 3167 2",
+      "missing": [
+        "Chiara Huber"
+      ],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 8,
+      "lang": "it",
+      "baseline_answer": "Giulia Widmer; 756.9481.1311.44; CH44 2646 2889 7514 0261 4",
+      "model_answer_redacted": "PERSON_da999a; AHV_0ad12b; IBAN_209076",
+      "final_answer": "Giulia Widmer; 756.9481.1311.44; CH44 2646 2889 7514 0261 4",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 9,
+      "lang": "de",
+      "baseline_answer": "Julien Huber; 756.2402.3448.38; CH84 2450 4000 8838 7371 6",
+      "model_answer_redacted": "PERSON_87538a; AHV_5e24c7; IBAN_4fa9ec",
+      "final_answer": "Julien Huber; 756.2402.3448.38; CH84 2450 4000 8838 7371 6",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 10,
+      "lang": "fr",
+      "baseline_answer": "Elena Brunner; 756.2016.8493.47; CH30 4704 5585 3043 5205 6",
+      "model_answer_redacted": "PERSON_b3259e; AHV_e2f364; IBAN_c63725",
+      "final_answer": "Elena Brunner; 756.2016.8493.47; CH30 4704 5585 3043 5205 6",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 11,
+      "lang": "it",
+      "baseline_answer": "Elena Galli; 756.9208.6828.81; CH70 3100 2516 7800 8374 0",
+      "model_answer_redacted": "PERSON_af0f69; AHV_6cbeb1; IBAN_555514",
+      "final_answer": "Elena Galli; 756.9208.6828.81; CH70 3100 2516 7800 8374 0",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 12,
+      "lang": "de",
+      "baseline_answer": "Marco Widmer; 756.4093.1925.45; CH45 0707 4137 4847 7718 3",
+      "model_answer_redacted": "PERSON_f18ea8; AHV_711650; IBAN_16a6f4",
+      "final_answer": "Marco Widmer; 756.4093.1925.45; CH45 0707 4137 4847 7718 3",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 13,
+      "lang": "fr",
+      "baseline_answer": "Mia Rochat; 756.9841.5377.60; CH04 7642 6565 1505 5613 0",
+      "model_answer_redacted": "PERSON_665ee3; AHV_1d92cb; IBAN_e7acaf",
+      "final_answer": "Mia Rochat; 756.9841.5377.60; CH04 7642 6565 1505 5613 0",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 14,
+      "lang": "it",
+      "baseline_answer": "Chiara Steiner; 756.1067.9247.06; CH80 6544 4463 4786 1221 3",
+      "model_answer_redacted": "PERSON_3acbbb; AHV_8fbc6f; IBAN_5538c0",
+      "final_answer": "Chiara Steiner; 756.1067.9247.06; CH80 6544 4463 4786 1221 3",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 15,
+      "lang": "de",
+      "baseline_answer": "Giulia Rochat; 756.0666.8364.58; CH03 5288 3143 6676 4020 6",
+      "model_answer_redacted": "PERSON_1d8087; AHV_69abcd; IBAN_001dd0",
+      "final_answer": "Giulia Rochat; 756.0666.8364.58; CH03 5288 3143 6676 4020 6",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 16,
+      "lang": "fr",
+      "baseline_answer": "Elena Bernasconi; 756.2390.4248.64; CH02 8936 4390 0847 4537 8",
+      "model_answer_redacted": "PERSON_64be3f; AHV_d57a33; IBAN_e29d91",
+      "final_answer": "Elena Bernasconi; 756.2390.4248.64; CH02 8936 4390 0847 4537 8",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 17,
+      "lang": "it",
+      "baseline_answer": "Marco Bonvin; 756.6563.0481.30; CH95 3734 4197 9237 6092 6",
+      "model_answer_redacted": "PERSON_971aac; AHV_c10513; IBAN_d6e24e",
+      "final_answer": "Marco Bonvin; 756.6563.0481.30; CH95 3734 4197 9237 6092 6",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 18,
+      "lang": "de",
+      "baseline_answer": "Mia Gerber; 756.7046.5572.17; CH54 5618 3654 6107 3587 3",
+      "model_answer_redacted": "PERSON_d26c29; AHV_5eaaa6; IBAN_d77088",
+      "final_answer": "Mia Gerber; 756.7046.5572.17; CH54 5618 3654 6107 3587 3",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 19,
+      "lang": "fr",
+      "baseline_answer": "Sophie Rossi; 756.9045.4409.10; CH30 7646 7272 0429 3557 5",
+      "model_answer_redacted": "PERSON_ee0af4; AHV_b38bf2; IBAN_31aefb",
+      "final_answer": "Sophie Rossi; 756.9045.4409.10; CH30 7646 7272 0429 3557 5",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 20,
+      "lang": "it",
+      "baseline_answer": "Luca Rochat; 756.7723.2679.34; CH35 4449 4544 3732 3324 9",
+      "model_answer_redacted": "PERSON_f71ec7; AHV_ca5bbe; IBAN_d66562",
+      "final_answer": "Luca Rochat; 756.7723.2679.34; CH35 4449 4544 3732 3324 9",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 21,
+      "lang": "de",
+      "baseline_answer": "Lea Ferrari; 756.4310.3993.13; CH05 9401 9953 0552 0340 9",
+      "model_answer_redacted": "PERSON_3cff06; AHV_2153d4; IBAN_5cd893",
+      "final_answer": "Lea Ferrari; 756.4310.3993.13; CH05 9401 9953 0552 0340 9",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 22,
+      "lang": "fr",
+      "baseline_answer": "Mia Bonvin; 756.8126.4644.63; CH86 6605 3663 0626 1169 5",
+      "model_answer_redacted": "Client; [[PERSON_630a9a]]; [[IBAN_436ea6]]",
+      "final_answer": "Client; Mia Bonvin; CH86 6605 3663 0626 1169 5",
+      "missing": [
+        "756.8126.4644.63"
+      ],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 23,
+      "lang": "it",
+      "baseline_answer": "Elena Steiner; 756.6734.2075.02; CH33 9239 6937 2930 6826 5",
+      "model_answer_redacted": "PERSON_06e582; AHV_4063e3; IBAN_001d10",
+      "final_answer": "Elena Steiner; 756.6734.2075.02; CH33 9239 6937 2930 6826 5",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 24,
+      "lang": "de",
+      "baseline_answer": "Nicolas Meier; 756.7200.9773.70; CH51 7611 2565 1788 0021 5",
+      "model_answer_redacted": "PERSON_c0377d; AHV_4cba2c; IBAN_155f74",
+      "final_answer": "Nicolas Meier; 756.7200.9773.70; CH51 7611 2565 1788 0021 5",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 25,
+      "lang": "fr",
+      "baseline_answer": "Jonas Meier; 756.5947.2487.39; CH30 3550 3262 4562 4180 5",
+      "model_answer_redacted": "Client; AHV-Nummer; IBAN",
+      "final_answer": "Client; AHV-Nummer; IBAN",
+      "missing": [
+        "Jonas Meier",
+        "756.5947.2487.39",
+        "CH30 3550 3262 4562 4180 5"
+      ],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 26,
+      "lang": "it",
+      "baseline_answer": "Matteo Morel; 756.8449.5003.29; CH52 6850 2739 0000 9541 8",
+      "model_answer_redacted": "PERSON_93dbcc; AHV_25995b; IBAN_e4c69f",
+      "final_answer": "Matteo Morel; 756.8449.5003.29; CH52 6850 2739 0000 9541 8",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 27,
+      "lang": "de",
+      "baseline_answer": "Lea Meier; 756.4640.0859.93; CH89 3200 0806 2320 1098 3",
+      "model_answer_redacted": "PERSON_8c8dba; AHV_1badf6; IBAN_15e94d",
+      "final_answer": "Lea Meier; 756.4640.0859.93; CH89 3200 0806 2320 1098 3",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 28,
+      "lang": "fr",
+      "baseline_answer": "Noah Ferrari; 756.7231.4301.58; CH29 8684 4318 0243 3253 6",
+      "model_answer_redacted": "PERSON_8448ea; AHV_518846; IBAN_77de1f",
+      "final_answer": "Noah Ferrari; 756.7231.4301.58; CH29 8684 4318 0243 3253 6",
+      "missing": [],
+      "unresolved_placeholders": 0
+    },
+    {
+      "id": 29,
+      "lang": "it",
+      "baseline_answer": "Chiara Galli; 756.1192.5200.02; CH27 0101 9538 1613 3310 0",
+      "model_answer_redacted": "PERSON_f6ab0e; AHV_1492e6; IBAN_d5ec33",
+      "final_answer": "Chiara Galli; 756.1192.5200.02; CH27 0101 9538 1613 3310 0",
+      "missing": [],
+      "unresolved_placeholders": 0
+    }
+  ],
+  "wall_time_s": 440.5
+}

@@ -1,0 +1,16 @@
+[
+  {"id": "s1", "kind": "dossier",
+   "say": "A Swiss fiduciary office. Three client files, in German, French and Italian, full of AHV numbers, IBANs, company IDs, birth dates and home addresses. Everything you see here is synthetic."},
+  {"id": "s2", "kind": "runtime",
+   "say": "Treuhand Shield runs next to Apertus version 1.5, 8B, on llama.cpp, inside a Docker network with no route to the internet. The demo checks that first: both outside addresses are blocked."},
+  {"id": "s3", "kind": "wire",
+   "say": "Before anything reaches the model, the Swiss identifiers are found by their check digits, and Apertus itself, running locally, finds the names, companies and addresses. Each value becomes a reversible token. This is exactly what the model receives."},
+  {"id": "s4", "kind": "answer",
+   "say": "Apertus writes the task list on tokens only. The proxy puts the real values back before the employee sees the answer."},
+  {"id": "s5", "kind": "checks",
+   "say": "The demo searches every byte sent to the model for the twenty-six sensitive values. The audit log keeps counts and a hash chain, never values. Edit one event, and the chain breaks."},
+  {"id": "s6", "kind": "eval",
+   "say": "On thirty generated client notes, the local Apertus detector cuts the sensitive values that reach the model from forty-two percent to under two percent, and ninety-three percent of the requested values come back correct, against one hundred percent without protection."},
+  {"id": "s7", "kind": "close",
+   "say": "One command, one machine, no cloud. Treuhand Shield with Apertus, open source under Apache 2.0."}
+]

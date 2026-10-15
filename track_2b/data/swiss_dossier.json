@@ -1,0 +1,33 @@
+{
+  "_note": "Fully synthetic. Names are the Swiss placeholder names Muster / Exemple / Esempio; every identifier was generated with a valid check digit for an invented body; emails use the reserved example.org domain. No real person, account or company.",
+  "task": "Du arbeitest für ein Schweizer Treuhandbüro. Erstelle aus dem folgenden Dossier eine kurze Aufgabenliste auf Deutsch: pro Mandant eine Zeile mit Name, AHV-Nummer und IBAN, darunter die offenen Punkte als Stichworte.",
+  "document": "Mandatsübersicht Treuhand, Steuerperiode 2025 (synthetisches Testdokument)\n\n1) Mandantin: Lea Muster, geboren am 14.03.1981, wohnhaft Bahnhofstrasse 12, 8001 Zürich.\nAHV-Nr. 756.2468.1357.91, Tel. +41 79 123 45 67, E-Mail lea.muster@example.org.\nLohnkonto IBAN CH03 0070 0110 0001 2345 6. Arbeitgeberin: Muster Treuhand GmbH, UID CHE-468.135.796 MWST.\nOffene Punkte: Bescheinigung Säule 3a fehlt, Steuererklärung bis 31.03. einreichen.\n\n2) Client : Jean Exemple, né le 02/07/1975, Rue du Lac 5, 1003 Lausanne.\nNuméro AVS 756.1357.9246.83, téléphone 021 555 01 23. Compte : CH08 0483 5098 7654 3210 0.\nEntreprise individuelle Exemple Conseil, IDE CHE-246.801.359 TVA.\nPoints ouverts : acompte TVA du 3e trimestre impayé.\n\n3) Cliente: Giulia Esempio, nata il 21.12.1969, Via Nassa 3, 6900 Lugano.\nNumero AVS 756.8642.0975.34, cellulare +41 76 555 77 88, passaporto n. X1234567.\nConto: CH43 8080 8009 8765 4321 0. Ditta: Esempio Immobili SA, IDI CHE-975.310.860 IVA.\nPunti aperti: rinnovo del passaporto, dichiarazione d'imposta 2025 da preparare.\n",
+  "sensitive_values": [
+    {"type": "PERSON", "text": "Lea Muster", "detector": "llm"},
+    {"type": "DATE_OF_BIRTH", "text": "14.03.1981", "detector": "regex"},
+    {"type": "ADDRESS", "text": "Bahnhofstrasse 12, 8001 Zürich", "detector": "llm"},
+    {"type": "AHV", "text": "756.2468.1357.91", "detector": "regex"},
+    {"type": "PHONE", "text": "+41 79 123 45 67", "detector": "regex"},
+    {"type": "EMAIL", "text": "lea.muster@example.org", "detector": "regex"},
+    {"type": "IBAN", "text": "CH03 0070 0110 0001 2345 6", "detector": "regex"},
+    {"type": "ORG", "text": "Muster Treuhand GmbH", "detector": "llm"},
+    {"type": "UID", "text": "CHE-468.135.796", "detector": "regex"},
+    {"type": "PERSON", "text": "Jean Exemple", "detector": "llm"},
+    {"type": "DATE_OF_BIRTH", "text": "02/07/1975", "detector": "regex"},
+    {"type": "ADDRESS", "text": "Rue du Lac 5, 1003 Lausanne", "detector": "llm"},
+    {"type": "AHV", "text": "756.1357.9246.83", "detector": "regex"},
+    {"type": "PHONE", "text": "021 555 01 23", "detector": "regex"},
+    {"type": "IBAN", "text": "CH08 0483 5098 7654 3210 0", "detector": "regex"},
+    {"type": "ORG", "text": "Exemple Conseil", "detector": "llm"},
+    {"type": "UID", "text": "CHE-246.801.359", "detector": "regex"},
+    {"type": "PERSON", "text": "Giulia Esempio", "detector": "llm"},
+    {"type": "DATE_OF_BIRTH", "text": "21.12.1969", "detector": "regex"},
+    {"type": "ADDRESS", "text": "Via Nassa 3, 6900 Lugano", "detector": "llm"},
+    {"type": "AHV", "text": "756.8642.0975.34", "detector": "regex"},
+    {"type": "PHONE", "text": "+41 76 555 77 88", "detector": "regex"},
+    {"type": "PASSPORT", "text": "X1234567", "detector": "regex"},
+    {"type": "IBAN", "text": "CH43 8080 8009 8765 4321 0", "detector": "regex"},
+    {"type": "ORG", "text": "Esempio Immobili SA", "detector": "llm"},
+    {"type": "UID", "text": "CHE-975.310.860", "detector": "regex"}
+  ]
+}

@@ -1,0 +1,80 @@
+
+== 1. Runtime ================================================================
+         answering model : swiss-ai/Apertus-v1.5-8B at http://127.0.0.1:8097/v1
+         NER model       : swiss-ai/Apertus-v1.5-8B at http://127.0.0.1:8097/v1
+         egress huggingface.co:443  : reachable
+         egress 1.1.1.1:443         : reachable
+         internet reachable from this process (use `make run` for the air-gapped network)
+  [ok]   model server ready, serving 'swiss-ai/Apertus-v1.5-8B'
+
+== 2. Client request (what the fiduciary employee pastes) ====================
+Mandatsübersicht Treuhand, Steuerperiode 2025 (synthetisches Testdokument)
+
+1) Mandantin: Lea Muster, geboren am 14.03.1981, wohnhaft Bahnhofstrasse 12, 8001 Zürich.
+AHV-Nr. 756.2468.1357.91, Tel. +41 79 123 45 67, E-Mail lea.muster@example.org.
+Lohnkonto IBAN CH03 0070 0110 0001 2345 6. Arbeitgeberin: Muster Treuhand GmbH, UID CHE-468.135.796 MWST.
+Offene Punkte: Bescheinigung Säule 3a fehlt, Steuererklärung bis 31.03. einreichen.
+
+2) Client : Jean Exemple, né le 02/07/1975, Rue du Lac 5, 1003 Lausanne.
+Numéro AVS 756.1357.9246.83, téléphone 021 555 01 23. Compte : CH08 0483 5098 7654 3210 0.
+Entreprise individuelle Exemple Conseil, IDE CHE-246.801.359 TVA.
+Points ouverts : acompte TVA du 3e trimestre impayé.
+
+3) Cliente: Giulia Esempio, nata il 21.12.1969, Via Nassa 3, 6900 Lugano.
+Numero AVS 756.8642.0975.34, cellulare +41 76 555 77 88, passaporto n. X1234567.
+Conto: CH43 8080 8009 8765 4321 0. Ditta: Esempio Immobili SA, IDI CHE-975.310.860 IVA.
+Punti aperti: rinnovo del passaporto, dichiarazione d'imposta 2025 da preparare.
+
+
+== 3. What Apertus received (captured on the wire) ===========================
+Du arbeitest für ein Schweizer Treuhandbüro. Erstelle aus dem folgenden Dossier eine kurze Aufgabenliste auf Deutsch: pro Mandant eine Zeile mit Name, AHV-Nummer und IBAN, darunter die offenen Punkte als Stichworte.
+
+Mandatsübersicht Treuhand, Steuerperiode 2025 (synthetisches Testdokument)
+
+1) Mandantin: [[PERSON_1664bd]], geboren am [[DATE_OF_BIRTH_89c339]], wohnhaft [[ADDRESS_5db063]].
+AHV-Nr. [[AHV_2f4a92]], Tel. [[PHONE_659e8f]], E-Mail [[EMAIL_b5304a]].
+Lohnkonto IBAN [[IBAN_2dbe9c]]. Arbeitgeberin: [[ORG_3c2afb]], UID [[UID_b56a95]] MWST.
+Offene Punkte: Bescheinigung Säule 3a fehlt, Steuererklärung bis 31.03. einreichen.
+
+2) Client : [[PERSON_c7d539]], né le [[DATE_OF_BIRTH_3bdcf0]], [[ADDRESS_479c8f]].
+Numéro AVS [[AHV_e7ff1e]], téléphone [[PHONE_b4df77]]. Compte : [[IBAN_289ffd]].
+Entreprise individuelle [[ORG_68e368]], IDE [[UID_e81749]] TVA.
+Points ouverts : acompte TVA du 3e trimestre impayé.
+
+3) Cliente: [[PERSON_795871]], nata il [[DATE_OF_BIRTH_05dfcc]], [[ADDRESS_1efcae]].
+Numero AVS [[AHV_d38bff]], cellulare [[PHONE_bd7a20]], passaporto n. [[PASSPORT_d1d1b5]].
+Conto: [[IBAN_3b85b6]]. Ditta: [[ORG_490114]], IDI [[UID_2368c6]] IVA.
+Punti aperti: rinnovo del passaporto, dichiarazione d'imposta 2025 da preparare.
+
+
+== 4. Apertus answer, as generated (placeholders only) =======================
+Mandantin: [[PERSON_1664bd]], AHV-Nr. [[AHV_2f4a92]], IBAN [[IBAN_2dbe9c]]; offene Punkte: Bescheinigung Säule 3a fehlt, Steuererklärung bis 31.03. einreichen.
+
+Client: [[PERSON_c7d539]], AHV-Nr. [[AHV_e7ff1e]], IBAN [[IBAN_289ffd]]; offene Punkte: acompte TVA 3. Trimester impayé.
+
+Cliente: [[PERSON_795871]], AHV-Nr. [[AHV_d38bff]], IBAN [[IBAN_3b85b6]]; offene Punkte: rinnovo del passaporto, dichiarazione d'imposta 2025 da preparare.
+
+== 5. Answer returned to the employee (values restored by the proxy) =========
+Mandantin: Lea Muster, AHV-Nr. 756.2468.1357.91, IBAN CH03 0070 0110 0001 2345 6; offene Punkte: Bescheinigung Säule 3a fehlt, Steuererklärung bis 31.03. einreichen.
+
+Client: Jean Exemple, AHV-Nr. 756.1357.9246.83, IBAN CH08 0483 5098 7654 3210 0; offene Punkte: acompte TVA 3. Trimester impayé.
+
+Cliente: Giulia Esempio, AHV-Nr. 756.8642.0975.34, IBAN CH43 8080 8009 8765 4321 0; offene Punkte: rinnovo del passaporto, dichiarazione d'imposta 2025 da preparare.
+
+== 6. Checks =================================================================
+  [ok]   17/17 structured identifiers (AHV, IBAN, UID, phone, passport, DOB, e-mail) were replaced before leaving the proxy
+  [ok]   9/9 names, companies and addresses caught by the local Apertus NER pass
+  [ok]   Apertus wrote 9 tokens verbatim and 0 in a degraded form that the proxy repaired; 0 left unresolved in the final answer
+         real values visible to the employee in the final answer: 9
+         end-to-end latency: 21.6s (identifiers + NER + answer on swiss-ai/Apertus-v1.5-8B)
+
+== 7. Audit trail (hash-chained, counts only) ================================
+  {"entity_counts": {"ADDRESS": 3, "AHV": 3, "DATE_OF_BIRTH": 3, "EMAIL": 1, "IBAN": 3, "ORG": 3, "PASSPORT": 1, "PERSON": 3, "PHONE": 3, "UID": 3}, "latency_ms": 21562, "model": "swiss-ai/Apertus-v1.5-8B", "placeholders_repaired": 0, "placeholders_unresolved": 0, "route": "/v1/chat/completions"}
+         prev_hash  0000000000000000...  event_hash 1950d7a61b97711d...
+  [ok]   audit chain verifies: True
+  [ok]   audit log contains 0 raw sensitive values (expected 0)
+  [ok]   after editing one audit event, chain verifies: False
+
+== Done ======================================================================
+         report: /fast/projects/treuhand-shield/track_2b/out/demo_report.json
+  [ok]   demo checks passed

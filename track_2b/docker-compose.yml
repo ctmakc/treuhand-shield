@@ -1,0 +1,101 @@
+# Hack Apertus, Track 2B: Treuhand Shield, air-gapped demo.
+#
+#   fetch-model  the ONLY service with internet: downloads the Apertus GGUF once into
+#                ${MODELS_DIR:-./models} (skipped when the file is present), checks SHA-256.
+#   llm          llama.cpp server with Apertus v1.5 8B (OpenAI-compatible API), network `airgap` only.
+#   demo         the proxy (real FastAPI route, in-process) + demo script, network `airgap` only.
+#   shield       the proxy as a service on localhost:8000 (`make serve`), for any OpenAI client.
+#
+# `airgap` is an internal Docker network: containers on it have no route to the internet.
+name: treuhand-shield
+
+x-model: &model
+  MODEL_FILE: ${MODEL_FILE:-apertus-v1.5-8b-text-q4_k_m.gguf}
+  MODEL_URL: ${MODEL_URL:-https://huggingface.co/Colby/apertus-v1.5-8b-text-Q4_K_M-GGUF/resolve/main/apertus-v1.5-8b-text-q4_k_m.gguf}
+  MODEL_SHA256: ${MODEL_SHA256:-a037df8d87ff6caacee794ee85f55342f2152e0d359b7389033300c3bee5f299}
+
+services:
+  fetch-model:
+    image: curlimages/curl:8.10.1
+    user: "0:0"
+    environment: *model
+    volumes:
+      - ${MODELS_DIR:-./models}:/models
+    networks: [egress]
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        set -e
+        if [ -s "/models/$$MODEL_FILE" ]; then echo "model present: $$MODEL_FILE"; else
+          echo "downloading $$MODEL_FILE (about 5 GB, one time)"
+          curl -fL --retry 3 -o "/models/$$MODEL_FILE.part" "$$MODEL_URL"
+          mv "/models/$$MODEL_FILE.part" "/models/$$MODEL_FILE"
+        fi
+        echo "$$MODEL_SHA256  /models/$$MODEL_FILE" | sha256sum -c -
+
+  llm:
+    image: ghcr.io/ggml-org/llama.cpp:server-b11561
+    command: ["-m", "/models/${MODEL_FILE:-apertus-v1.5-8b-text-q4_k_m.gguf}", "--host", "0.0.0.0", "--port", "8080",
+              "-c", "8192", "-np", "1", "--jinja", "--alias", "swiss-ai/Apertus-v1.5-8B"]
+    volumes:
+      - ${MODELS_DIR:-./models}:/models:ro
+    networks: [airgap]
+    depends_on:
+      fetch-model:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 120
+
+  demo:
+    build: .
+    environment:
+      LLM_BASE_URL: http://llm:8080/v1
+      LLM_NAME: swiss-ai/Apertus-v1.5-8B
+      DEMO_OUT_DIR: /out
+    volumes:
+      - ./out:/out
+    networks: [airgap]
+    depends_on:
+      llm:
+        condition: service_healthy
+
+  shield:
+    profiles: ["serve"]
+    build: .
+    command: ["python", "-m", "shield"]
+    working_dir: /app/src
+    environment:
+      LLM_BASE_URL: http://llm:8080/v1
+      LLM_NAME: swiss-ai/Apertus-v1.5-8B
+      AUDIT_LOG_PATH: /out/audit.jsonl
+    volumes:
+      - ./out:/out
+    ports:
+      - "127.0.0.1:8000:8000"
+    networks: [airgap, publish]
+    depends_on:
+      llm:
+        condition: service_healthy
+
+  # Same demo against a hosted Apertus endpoint (sovereign Swiss cloud):
+  #   LLM_BASE_URL=... LLM_NAME=... LLM_API_KEY=... make run-remote
+  demo-remote:
+    profiles: ["remote"]
+    build: .
+    environment:
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
+      LLM_NAME: ${LLM_NAME:-swiss-ai/Apertus-v1.5-8B}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      DEMO_OUT_DIR: /out
+    volumes:
+      - ./out:/out
+    networks: [egress]
+
+networks:
+  airgap:
+    internal: true
+  egress: {}
+  publish: {}
